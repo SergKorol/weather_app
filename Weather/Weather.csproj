@@ -135,6 +135,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interfaces\IWeatherMap.cs" />
+    <Compile Include="Models\Clouds.cs" />
+    <Compile Include="Models\Coordinates.cs" />
+    <Compile Include="Models\MainInfo.cs" />
+    <Compile Include="Models\Sys.cs" />
+    <Compile Include="Models\WeatherInfo.cs" />
+    <Compile Include="Models\WeatherWidget.cs" />
+    <Compile Include="Models\Wind.cs" />
+    <Compile Include="Services\ApiService.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -185,6 +194,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\Img\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

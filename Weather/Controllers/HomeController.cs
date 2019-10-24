@@ -8,17 +8,19 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Weather.Models;
+using Weather.Services;
 
 namespace Weather.Controllers
 {
-    [AllowAnonymous]
     public class HomeController : Controller
     {
-        public HomeController()
-        {
+        private readonly ApiService _apiService;
 
+        public HomeController(ApiService apiService)
+        {
+            _apiService = apiService;
         }
-        
+
         public ActionResult Index()
         {
             string ip = new WebClient().DownloadString("http://ifconfig.me");
@@ -27,8 +29,7 @@ namespace Weather.Controllers
             RegionInfo myRI1 = new RegionInfo(ipInfo.Country);
             ipInfo.Country = myRI1.EnglishName;
             string apiKey = "468a503ea1fb7b213d5d77f5bd066c60";
-            var apiRequest = WebRequest.Create("https://api.openweathermap.org/data/2.5/weather?q=London,uk&APPID=468a503ea1fb7b213d5d77f5bd066c60");
-
+            var apiRequest = WebRequest.Create(string.Format("https://api.openweathermap.org/data/2.5/weather?q={0}&APPID={1}&units=metric", ipInfo.City, apiKey));
             string apiResponse = "";
             using (HttpWebResponse response = apiRequest.GetResponse() as HttpWebResponse)
             {
@@ -36,7 +37,9 @@ namespace Weather.Controllers
                 apiResponse = reader.ReadToEnd();
             }
 
-            return View();
+            WeatherWidget weatherWidget = JsonConvert.DeserializeObject<WeatherWidget>(apiResponse);
+
+            return View(weatherWidget);
         }
 
         public ActionResult About()

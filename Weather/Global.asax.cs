@@ -3,11 +3,13 @@ using Autofac.Integration.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using Weather.Services;
 
 namespace Weather
 {
@@ -15,9 +17,12 @@ namespace Weather
     {
         protected void Application_Start()
         {
-            var builder = new ContainerBuilder();
-
+            ContainerBuilder builder = new ContainerBuilder();
+            Type[] assemblyTypes = (typeof(MvcApplication).Assembly).DefinedTypes
+                .Where(t => t.Name.EndsWith("Service")).ToArray();
             builder.RegisterControllers(typeof(MvcApplication).Assembly);
+            builder.RegisterTypes(assemblyTypes);
+            
             builder.RegisterModelBinders(typeof(MvcApplication).Assembly);
             builder.RegisterModelBinderProvider();
             builder.RegisterModule<AutofacWebTypesModule>();
