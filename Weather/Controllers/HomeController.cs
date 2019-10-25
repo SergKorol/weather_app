@@ -1,13 +1,4 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Web;
-using System.Web.Mvc;
-using Weather.Models;
+﻿using System.Web.Mvc;
 using Weather.Services;
 
 namespace Weather.Controllers
@@ -15,7 +6,7 @@ namespace Weather.Controllers
     public class HomeController : Controller
     {
         private readonly ApiService _apiService;
-
+        
         public HomeController(ApiService apiService)
         {
             _apiService = apiService;
@@ -23,35 +14,21 @@ namespace Weather.Controllers
 
         public ActionResult Index()
         {
-            string ip = new WebClient().DownloadString("http://ifconfig.me");
-            string info = new WebClient().DownloadString("http://ipinfo.io/" + ip);
-            var ipInfo = JsonConvert.DeserializeObject<IpInfo>(info);
-            RegionInfo myRI1 = new RegionInfo(ipInfo.Country);
-            ipInfo.Country = myRI1.EnglishName;
-            string apiKey = "468a503ea1fb7b213d5d77f5bd066c60";
-            var apiRequest = WebRequest.Create(string.Format("https://api.openweathermap.org/data/2.5/weather?q={0}&APPID={1}&units=metric", ipInfo.City, apiKey));
-            string apiResponse = "";
-            using (HttpWebResponse response = apiRequest.GetResponse() as HttpWebResponse)
-            {
-                StreamReader reader = new StreamReader(response.GetResponseStream());
-                apiResponse = reader.ReadToEnd();
-            }
-
-            WeatherWidget weatherWidget = JsonConvert.DeserializeObject<WeatherWidget>(apiResponse);
-
-            return View(weatherWidget);
+            //pass model to main page
+            return View(_apiService.GetWeatherWidget());
         }
-
+        
+        
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
-
+            ViewBag.Message = "About author this application";
+            
             return View();
         }
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "Serhii Korol";
 
             return View();
         }

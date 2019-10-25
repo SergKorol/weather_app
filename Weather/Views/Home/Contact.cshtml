@@ -1,17 +1,23 @@
 ﻿@{
-    ViewBag.Title = "Contact";
+    ViewBag.Title = "Contacts";
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
+<div class="container">
+    <div class="row">
+        <div class="body-content">
+            <h2>@ViewBag.Title</h2>
+            <h3><span class="glyphicon glyphicon-user"></span> @ViewBag.Message</h3>
 
-<address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
-</address>
+            <address>
+                <span class="glyphicon glyphicon-home"></span> Kyiv, UA<br/>
+                <span class="glyphicon glyphicon-phone-alt"></span> <abbr title="Phone">Phone:</abbr>
+                +380957895940
+            </address>
 
-<address>
-    <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
+            <address>
+                <span class="glyphicon glyphicon-envelope"></span> <strong>For communications:</strong>
+                <a href="mailto:korols83@gmail.com">korols83@gmail.com</a><br/>
+            </address>
+        </div>
+    </div>
+</div>
+

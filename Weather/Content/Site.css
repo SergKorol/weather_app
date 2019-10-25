@@ -1,4 +1,8 @@
-﻿body {
+﻿@import url(https://fonts.googleapis.com/css?family=Monofett:400);
+
+
+
+body {
     padding-top: 50px;
     padding-bottom: 20px;
 }
@@ -23,11 +27,18 @@ textarea {
     max-width: 280px;
 }
 
-.weather_main 
+.icon_title
 {
-    font-size: large;
+    font-size: 46px;
     text-align:center;
     font-weight: bolder;
+
+    font-family: 'Monofett', cursive;
+}
+
+.divide 
+{
+    border-top: solid 3px black;
 }
 
 .weather {
@@ -35,12 +46,14 @@ textarea {
     flex-flow: column wrap;
     box-shadow: 0px 1px 10px 0px #cfcfcf;
     overflow: hidden;
+    margin-top: 50px;
+    border-radius: 10px;
 }
 
     .weather .current {
         display: flex;
         flex-flow: row wrap;
-        background-image: url("/Content/Img/background-kyiv.jpg");
+        background-image: url("Img/background-kyiv.jpg");
         background-repeat: repeat-x;
         color: white;
         padding: 20px;
@@ -81,6 +94,7 @@ textarea {
             flex-grow: 1;
             text-align: center;
             cursor: pointer;
+            background-color: oldlace;
         }
 
             .weather .future .day:hover {
